@@ -1,0 +1,32 @@
+title: AWS E2 Full Network Packet Capture Detected
+id: c1812764-0788-470f-8e74-eb4a14d47573
+status: experimental
+description: Detects potential Traffic Mirroring in an Amazon Elastic Compute Cloud (EC2) instance. Traffic Mirroring is an Amazon VPC feature that you can use to copy network traffic from an elastic network interface. This feature can potentially be abused to exfiltrate sensitive data from unencrypted internal traffic.
+author: Elastic, austinsonger
+date: 2021/07/24
+references:
+    - https://github.com/elastic/detection-rules/blob/main/rules/aws/exfiltration_ec2_full_network_packet_capture_detected.toml
+    - https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TrafficMirrorFilter.html
+    - https://github.com/easttimor/aws-incident-response
+logsource:
+    service: cloudtrail
+detection:
+    selection_source:
+        - eventSource: ec2.amazonaws.com
+    selection_eventname1:
+        - eventName: CreateTrafficMirrorFilter
+    selection_eventname2:
+        - eventName: CreateTrafficMirrorFilterRule
+    selection_eventname3:
+        - eventName: CreateTrafficMirrorSession
+    selection_eventname4:
+        - eventName: CreateTrafficMirrorTarget
+    condition: selection_source AND selection_eventname1 or selection_eventname2 or selection_eventname3 or selection_eventname4
+falsepositives:
+    - Traffic Mirroring may be done by a system or network administrator. Verify whether the user identity, user agent, and/or hostname should be making changes in your environment. Traffic Mirroring from unfamiliar users or hosts should be investigated. If known behavior is causing false positives, it can be exempted from the rule.
+level: medium
+tags:
+    - attack.automated_exfiltration
+    - attack.exfiltration
+    - attack.t1074
+    - attack.collection
