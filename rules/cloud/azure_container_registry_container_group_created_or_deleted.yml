@@ -1,0 +1,21 @@
+title: Azure Container Registry Container Group Created or Deleted
+id: a60add87-5cac-4fec-8dd9-bc1c7085bcf3
+description: Identifies when a container group is created or deleted in Azure.
+author: Austin Songer
+status: experimental
+date: 2021/08/07
+references:
+    - https://docs.microsoft.com/en-us/azure/role-based-access-control/resource-provider-operations#microsoftkubernetes
+logsource:
+  service: azure.activitylogs
+detection:
+    selection:
+        properties.message: 
+            - MICROSOFT.CONTAINERINSTANCE/CONTAINERGROUPS/WRITE	
+            - MICROSOFT.CONTAINERINSTANCE/CONTAINERGROUPS/DELETE
+    condition: selection
+level: medium
+tags:
+    - attack.impact
+falsepositives:
+ - Container group created or deleted may be performed by a system administrator. Verify whether the user identity, user agent, and/or hostname should be making changes in your environment. Container group created or deleted from unfamiliar users should be investigated. If known behavior is causing false positives, it can be exempted from the rule.
