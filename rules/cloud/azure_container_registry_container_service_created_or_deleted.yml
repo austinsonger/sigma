@@ -1,0 +1,21 @@
+title: Azure Container Registry Container Service Created or Deleted
+id: 
+description: Identifies when a Container service is created or deleted.
+author: Austin Songer
+status: experimental
+date: 2021/08/07
+references:
+    - https://docs.microsoft.com/en-us/azure/role-based-access-control/resource-provider-operations#microsoftkubernetes
+logsource:
+  service: azure.activitylogs
+detection:
+    selection:
+        properties.message: 
+            - MICROSOFT.CONTAINERSERVICE/CONTAINERSERVICES/WRITE	
+            - MICROSOFT.CONTAINERSERVICE/CONTAINERSERVICES/DELETE
+    condition: selection
+level: medium
+tags:
+    - attack.impact
+falsepositives:
+ - Container service created and deleted may be performed by a system administrator. Verify whether the user identity, user agent, and/or hostname should be making changes in your environment. Container service created or deleted from unfamiliar users should be investigated. If known behavior is causing false positives, it can be exempted from the rule.
