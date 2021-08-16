@@ -1,0 +1,25 @@
+title: Google Cloud Git Repo Modified or Deleted
+id: c2d262b5-eefe-4664-9a5c-823637a6798c
+description: Identifies when a Git Repo Configuration Modified or Deleted in Google Cloud. 
+author: Austin Songer
+status: experimental
+date: 2021/08/16
+references:
+    - https://www.any-api.com/googleapis_com/sourcerepo/docs/projects
+logsource:
+  service: gcp.audit
+detection:
+    selection:
+        gcp.audit.method_name: 
+            - sourcerepo.projects.repos.create
+            - sourcerepo.projects.repos.patch
+            - sourcerepo.projects.repos.delete
+            - sourcerepo.projects.updateConfig
+    condition: selection
+level: medium
+tags:
+    - attack.impact
+falsepositives:
+ - Git Repo Configuration being modified or deleted may be performed by a system administrator. 
+ - Verify whether the user identity, user agent, and/or hostname should be making changes in your environment. 
+ - Git Repo Configuration modified or deleted from unfamiliar users should be investigated. If known behavior is causing false positives, it can be exempted from the rule.
