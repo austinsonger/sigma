@@ -1,0 +1,23 @@
+title: Google Cloud Interconnect Modified or Deleted
+id: 74c53746-c14c-482b-8d7e-f7b47018f3cf
+description: Identifies when a interconnect resource is a dedicated connection between the GCP network and your on-premises network is modified or deleted.
+author: Austin Songer
+status: experimental
+date: 2021/08/16
+references:
+    - https://cloud.google.com/compute/docs/reference/rest/v1/interconnects
+logsource:
+  service: gcp.audit
+detection:
+    selection:
+        gcp.audit.method_name: 
+            - compute.interconnects.delete
+            - compute.interconnects.insert
+            - compute.interconnects.patch
+    condition: selection
+level: medium
+tags:
+    - attack.impact
+falsepositives:
+ - GCP Interconnect being modified or deleted may be performed by a system administrator. Verify whether the user identity, user agent, and/or hostname should be making changes in your environment. 
+ - GCP Interconnect modified or deleted from unfamiliar users should be investigated. If known behavior is causing false positives, it can be exempted from the rule.
