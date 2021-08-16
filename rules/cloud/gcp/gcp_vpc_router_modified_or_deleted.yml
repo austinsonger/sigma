@@ -1,0 +1,24 @@
+title: Google Cloud VPC Router Modified or Deleted
+id: 8ecae1cc-24ac-47e9-8d0b-25effd2a1e5d
+description: Identifies when a VPC router is modified or deleted. 
+author: Austin Songer
+status: experimental
+date: 2021/08/16
+references:
+    - https://any-api.com/googleapis_com/compute/docs/routers
+logsource:
+  service: gcp.audit
+detection:
+    selection:
+        gcp.audit.method_name: 
+            - compute.routers.insert
+            - compute.routers.delete
+            - compute.routers.patch
+            - compute.routers.update
+    condition: selection
+level: medium
+tags:
+    - attack.impact
+falsepositives:
+ - Router being modified or deleted may be performed by a system administrator. Verify whether the user identity, user agent, and/or hostname should be making changes in your environment. 
+ - Router modified or deleted from unfamiliar users should be investigated. If known behavior is causing false positives, it can be exempted from the rule.
