@@ -1,0 +1,25 @@
+title: Google Cloud VPC Network Modified or Deleted
+id: 07c67a4c-93f9-40e9-82f1-83723624c142
+description: Identifies when a VPC network is modified or deleted in Google Cloud. 
+author: Austin Songer
+status: experimental
+date: 2021/08/16
+references:
+    - https://cloud.google.com/vpc/docs/vpc
+logsource:
+  service: gcp.audit
+detection:
+    selection:
+        gcp.audit.method_name: 
+            - compute.networks.patch
+            - compute.networks.delete
+            - compute.networks.addPeering
+            - compute.networks.removePeering
+            - compute.networks.switchToCustomMode
+    condition: selection
+level: medium
+tags:
+    - attack.impact
+falsepositives:
+ - VPC Network being modified or deleted may be performed by a system administrator. Verify whether the user identity, user agent, and/or hostname should be making changes in your environment. 
+ - VPC Network modified or deleted from unfamiliar users should be investigated. If known behavior is causing false positives, it can be exempted from the rule.
