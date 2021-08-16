@@ -1,0 +1,22 @@
+title: Google Cloud VPC Route Modified or Deleted
+id: 9dc87290-dd61-41b2-b093-82762b5540be
+description: Identifies when a VPC Route is modified or deleted in Google Cloud. 
+author: Austin Songer
+status: experimental
+date: 2021/08/16
+references:
+    - https://cloud.google.com/compute/docs/reference/rest/v1/routes
+logsource:
+  service: gcp.audit
+detection:
+    selection:
+        gcp.audit.method_name: 
+            - compute.routes.insert
+            - compute.routes.delete
+    condition: selection
+level: low
+tags:
+    - attack.impact
+falsepositives:
+ - VPC Route being modified or deleted may be performed by a system administrator. Verify whether the user identity, user agent, and/or hostname should be making changes in your environment. 
+ - VPC Route modified or deleted from unfamiliar users should be investigated. If known behavior is causing false positives, it can be exempted from the rule.
