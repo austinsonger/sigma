@@ -1,0 +1,23 @@
+title: Azure Storage Account Management Policy Change
+id: 8e51dae4-9bcf-46f5-b2f5-b7434cfd1ee5
+description: Identifies when a storage account management policy is modified or deleted.
+author: Austin Songer
+status: experimental
+date: 2021/08/16
+references:
+    - https://docs.microsoft.com/en-us/azure/role-based-access-control/resource-provider-operations
+logsource:
+  service: azure.activitylogs
+detection:
+    selection:
+        properties.message: 
+            - MICROSOFT.STORAGE/STORAGEACCOUNTS/MANAGEMENTPOLICIES/DELETE
+            - MICROSOFT.STORAGE/STORAGEACCOUNTS/MANAGEMENTPOLICIES/WRITE
+    condition: selection
+level: medium
+tags:
+    - attack.impact
+falsepositives:
+ - Storage Account Management Policy being modified or deleted may be performed by a system administrator. 
+ - Verify whether the user identity, user agent, and/or hostname should be making changes in your environment. 
+ - Storage Account Management Policy modified or deleted from unfamiliar users should be investigated. If known behavior is causing false positives, it can be exempted from the rule.
