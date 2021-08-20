@@ -1,0 +1,24 @@
+title: Microsoft 365 - Mass download by a single user
+id: dead735c-86a7-4575-be31-d8ad1ef30f3f
+status: experimental
+description: Detects when a Microsoft Cloud App Security reported when a single user performs more than 50 downloads within 1 minute.
+author: austinsonger
+date: 2021/08/19
+references:
+    - https://docs.microsoft.com/en-us/cloud-app-security/anomaly-detection-policy
+    - https://docs.microsoft.com/en-us/cloud-app-security/policy-template-reference
+logsource:
+    category: ThreatManagement
+    service: Office365
+detection:
+    selection:
+        eventSource: SecurityComplianceCenter
+        eventName: "Mass download by a single user"
+        status: success
+    condition: selection
+falsepositives:
+    - Unknown
+level: medium
+tags:
+    - attack.impact
+    - attack.t1485
