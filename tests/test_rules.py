@@ -234,7 +234,7 @@ class TestRules(unittest.TestCase):
 
     def test_missing_id(self):
         faulty_rules = []
-        list_id = []
+        dict_id = {}
         for file in self.yield_next_rule_file_path(self.path_to_rules):
             id = self.get_rule_part(file_path=file, part_name="id")
             if not id:
@@ -243,11 +243,11 @@ class TestRules(unittest.TestCase):
             elif len(id) != 36:
                 print(Fore.YELLOW + "Rule {} has a malformed 'id' (not 36 chars).".format(file))
                 faulty_rules.append(file)                
-            elif id in list_id:
-                print(Fore.YELLOW + "Rule {} has a duplicate 'id'.".format(file))
+            elif id in dict_id.keys():
+                print(Fore.YELLOW + "Rule {} has the same 'id' than {} must be unique.".format(file,dict_id[id]))
                 faulty_rules.append(file)
             else:
-                list_id.append(id)
+                dict_id[id] = file
 
         self.assertEqual(faulty_rules, [], Fore.RED + 
                          "There are rules with missing or malformed 'id' fields. Create an id (e.g. here: https://www.uuidgenerator.net/version4) and add it to the reported rule(s).")
@@ -344,7 +344,7 @@ class TestRules(unittest.TestCase):
             status_str = self.get_rule_part(file_path=file, part_name="status")
             if status_str:
                 if not status_str in valid_status:
-                    print(Fore.YELLOW + "Rule {} has a invalide 'status' (check wiki).".format(file))
+                    print(Fore.YELLOW + "Rule {} has a invalid 'status' (check wiki).".format(file))
                     faulty_rules.append(file) 
 
         self.assertEqual(faulty_rules, [], Fore.RED +
@@ -365,7 +365,7 @@ class TestRules(unittest.TestCase):
                 print(Fore.YELLOW + "Rule {} has no field 'level'.".format(file))
                 faulty_rules.append(file)
             elif not level_str in valid_level:
-                    print(Fore.YELLOW + "Rule {} has a invalide 'level' (check wiki).".format(file))
+                    print(Fore.YELLOW + "Rule {} has a invalid 'level' (check wiki).".format(file))
                     faulty_rules.append(file)
 
         self.assertEqual(faulty_rules, [], Fore.RED +
@@ -397,7 +397,8 @@ class TestRules(unittest.TestCase):
         self.assertEqual(faulty_rules, [], Fore.RED + 
                          "There are rules with malformed optional 'falsepositives' fields. (has to be a list of values even if it contains only a single value)")
 
-    def test_optional_author(self):
+    # Upgrade Detection Rule License  1.1
+    def test_author(self):
         faulty_rules = []
         for file in self.yield_next_rule_file_path(self.path_to_rules):
             author_str = self.get_rule_part(file_path=file, part_name="author")
@@ -406,9 +407,24 @@ class TestRules(unittest.TestCase):
                 if not isinstance(author_str, str):
                     print(Fore.YELLOW + "Rule {} has a 'author' field that isn't a string.".format(file))
                     faulty_rules.append(file)
+            else:
+                print(Fore.YELLOW + "Rule {} has no 'author' field".format(file))
+                faulty_rules.append(file)
 
         self.assertEqual(faulty_rules, [], Fore.RED + 
-                         "There are rules with malformed optional 'author' fields. (has to be a string even if it contains many author)")
+                         "There are rules with malformed 'author' fields. (has to be a string even if it contains many author)")
+
+    def test_optional_license(self):
+        faulty_rules = []
+        for file in self.yield_next_rule_file_path(self.path_to_rules):
+            license_str = self.get_rule_part(file_path=file, part_name="license")
+            if license_str:
+                if not isinstance(license_str, str):
+                    print(Fore.YELLOW + "Rule {} has a malformed 'license' (has to be a string).".format(file))
+                    faulty_rules.append(file)
+
+        self.assertEqual(faulty_rules, [], Fore.RED +
+                         "There are rules with malformed 'license' fields. (has to be a string )")
 
     def test_optional_tlp(self):
         faulty_rules = []
@@ -546,35 +562,36 @@ class TestRules(unittest.TestCase):
             for key in logsource:
                 if key.lower() not in valid_logsource:
                     print(Fore.RED + "Rule {} has a logsource with an invalid field ({})".format(file, key))
-                    valide = False
+                    valid = False
             if not valid:
                faulty_rules.append(file)
 
         self.assertEqual(faulty_rules, [], Fore.RED + 
                          "There are rules with non-conform 'logsource' fields. Please check: https://github.com/SigmaHQ/sigma/wiki/Rule-Creation-Guide#log-source")
   
-  #deactivate because more than 170 rules have been corrected
-  #  def test_selection_list_one_value(self):
-  #      faulty_rules = []
-  #      for file in self.yield_next_rule_file_path(self.path_to_rules):
-  #          detection = self.get_rule_part(file_path=file, part_name="detection")
-  #          if detection:
-  #              valid = True
-  #              for key in detection:
-  #                  if isinstance(detection[key],list):
-  #                      if len(detection[key]) == 1 and not isinstance(detection[key][0],str): #rule with only list of Keywords term
-  #                         print(Fore.RED + "Rule {} has the selection ({}) with a list of only 1 value in detection".format(file, key))
-  #                         #valid = False
+
+    def test_selection_list_one_value(self):
+        faulty_rules = []
+        for file in self.yield_next_rule_file_path(self.path_to_rules):
+             detection = self.get_rule_part(file_path=file, part_name="detection")
+             if detection:
+                 valid = True
+                 for key in detection:
+                     if isinstance(detection[key],list):
+                         if len(detection[key]) == 1 and not isinstance(detection[key][0],str): #rule with only list of Keywords term
+                            print(Fore.RED + "Rule {} has the selection ({}) with a list of only 1 element in detection".format(file, key))
+                            valid = False
+  #deactivate because more than 170 rules have to be corrected
   #                  if isinstance(detection[key],dict):
   #                      for sub_key in detection[key]:
   #                          if isinstance(detection[key][sub_key],list): #split in 2 if as get a error "int has not len()"
   #                              if len(detection[key][sub_key]) == 1:
   #                                  print (Fore.RED + "Rule {} has the selection ({}/{}) with a list of only 1 value in detection".format(file, key, sub_key))
   #                                  #valid = False
-  #              if not valid:
-  #                faulty_rules.append(file)
-  #
-  #      self.assertEqual(faulty_rules, [], Fore.RED + "There are rules using list with only 1 value")
+                 if not valid:
+                     faulty_rules.append(file)
+   
+        self.assertEqual(faulty_rules, [], Fore.RED + "There are rules using list with only 1 element")
 
 def get_mitre_data():
     """
