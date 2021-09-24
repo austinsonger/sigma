@@ -8,4 +8,7 @@ fieldmappings:
   activityDisplayName: OperationName
   loggedByService: LoggedByService
   result: Result
+  resultReason: ResultReason # Indicates the reason for failure if the result is failure or timeout.
+  status.errorCode: ErrorCode
+  status.failureReason: FailureReason
   initiatedBy.user.userPrincipalName: initiatedBy.user.userPrincipalName
