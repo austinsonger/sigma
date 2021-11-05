@@ -1,5 +1,8 @@
 title: Suspicious PowerShell Download
-id: 65531a81-a694-4e31-ae04-f8ba5bc33759
+id: de41232e-12e8-49fa-86bc-c05c7e722df9
+related:
+    - id: 65531a81-a694-4e31-ae04-f8ba5bc33759
+      type: derived
 status: experimental
 description: Detects suspicious PowerShell download command
 tags:
@@ -8,16 +11,17 @@ tags:
     - attack.t1086  #an old one
 author: Florian Roth
 date: 2017/03/05
-modified: 2021/09/21
+modified: 2021/10/18
 logsource:
     product: windows
-    service: powershell
+    category: ps_module
 detection:
     webclient:
-        - 'System.Net.WebClient'
+        ContextInfo|contains: 'System.Net.WebClient'
     download:
-        - '.DownloadFile('
-        - '.DownloadString('
+        ContextInfo|contains:
+            - '.DownloadFile('
+            - '.DownloadString('
     condition: webclient and download
 falsepositives:
     - PowerShell scripts that download content from the Internet

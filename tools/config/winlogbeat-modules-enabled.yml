@@ -108,9 +108,9 @@ fieldmappings:
     EventID: event.code
     Channel: winlog.channel
     #Keywords: from "<System><Keywords>Value</Keywords></System><EventData>" is lost with winlogbeat exist in nxlog
-    provider name: winlog.provider_name
+    Provider_Name: winlog.provider_name
     CallingProcessName: winlog.event_data.CallingProcessName
-    ComputerName: winlog.ComputerName
+    ComputerName: winlog.computer_name
     EventType: winlog.event_data.EventType
     FailureCode: winlog.event_data.FailureCode
     FileName: file.path
@@ -155,22 +155,25 @@ fieldmappings:
     Image: process.executable
     FileVersion: 
         category=process_creation: process.pe.file_version
-        category=image_load: process.pe.file_version
+        category=image_load: file.pe.file_version
         default: winlog.event_data.FileVersion
     Description:
         category=process_creation: process.pe.description
-        category=image_load: process.pe.description
+        category=image_load: file.pe.description
         category=sysmon_error: winlog.event_data.Description
         default: winlog.event_data.Description
     Product:
         category=process_creation: process.pe.product
-        category=image_load: process.pe.product
+        category=image_load: file.pe.product
         default: winlog.event_data.Product
     Company: 
         category=process_creation: process.pe.company
-        category=image_load: process.pe.company
+        category=image_load: file.pe.company
         default: winlog.event_data.Company
-    OriginalFileName: process.pe.original_file_name
+    OriginalFileName: 
+        category=process_creation: process.pe.original_file_name
+        category=image_load: file.pe.original_file_name
+        default: winlog.event_data.OriginalFileName
     CommandLine: 
         category=process_creation: process.command_line
         service=security: process.command_line
@@ -185,6 +188,9 @@ fieldmappings:
     ParentProcessId: process.parent.pid
     ParentImage: process.parent.executable
     ParentCommandLine: process.parent.command_line
+    ParentUser: winlog.event_data.ParentUser  #Sysmon 13.30
+    SourceUser: winlog.event_data.SourceUser  #Sysmon 13.30
+    TargetUser: winlog.event_data.TargetUser  #Sysmon 13.30
     TargetFilename: file.path
     CreationUtcTime: winlog.event_data.CreationUtcTime
     PreviousCreationUtcTime: winlog.event_data.PreviousCreationUtcTime
@@ -503,40 +509,40 @@ fieldmappings:
     #
     # Microsoft-Windows-Windows Defender/Operational
     #
-    Action ID: winlog.event_data.Action\ ID
-    Action Name: winlog.event_data.Action\ Name
-    Additional Actions ID: winlog.event_data.Additional\ Actions\ ID
-    Additional Actions String: winlog.event_data.Additional\ Actions\ String
-    Category ID: winlog.event_data.Category\ ID
-    Category Name: winlog.event_data.Category\ Name
-    Detection ID: winlog.event_data.Detection\ ID
-    Detection Time: winlog.event_data.Detection\ Time
-    Detection User: winlog.event_data.Detection\ User
-    Engine Version: winlog.event_data.Engine\ Version
-    Error Code: winlog.event_data.Error\ Code
-    Error Description: winlog.event_data.Error\ Description
-    Execution ID: winlog.event_data.Execution\ ID
-    Execution Name: winlog.event_data.Execution\ Name
+    Action_ID: winlog.event_data.Action\ ID
+    Action_Name: winlog.event_data.Action\ Name
+    Additional_Actions_ID: winlog.event_data.Additional\ Actions\ ID
+    Additional_Actions_String: winlog.event_data.Additional\ Actions\ String
+    Category_ID: winlog.event_data.Category\ ID
+    Category_Name: winlog.event_data.Category\ Name
+    Detection_ID: winlog.event_data.Detection\ ID
+    Detection_Time: winlog.event_data.Detection\ Time
+    Detection_User: winlog.event_data.Detection\ User
+    Engine_Version: winlog.event_data.Engine\ Version
+    Error_Code: winlog.event_data.Error\ Code
+    Error_Description: winlog.event_data.Error\ Description
+    Execution_ID: winlog.event_data.Execution\ ID
+    Execution_Name: winlog.event_data.Execution\ Name
     FWLink: winlog.event_data.FWLink
-    New Value: winlog.event_data.New\ Value
-    Old Value: winlog.event_data.Old\ Value
-    Origin ID: winlog.event_data.Origin\ ID
-    Origin Name: winlog.event_data.Origin\ Name
+    New_Value: winlog.event_data.New\ Value
+    Old_Value: winlog.event_data.Old\ Value
+    Origin_ID: winlog.event_data.Origin\ ID
+    Origin_Name: winlog.event_data.Origin\ Name
     Path: winlog.event_data.Path
-    Post Clean Status: winlog.event_data.Post\ Clean\ Status
-    Pre Execution Status: winlog.event_data.Pre\ Execution\ Status
-    Process Name: winlog.event_data.Process\ Name
-    Product Name: winlog.event_data.Product\ Name
-    Product Version: winlog.event_data.Product\ Version
-    Remediation User: winlog.event_data.Remediation\ User
-    Security intelligence Version: winlog.event_data.Security\ intelligence\ Version
-    Severity ID: winlog.event_data.Severity\ ID
-    Severity Name: winlog.event_data.Severity\ Name
-    Source ID: winlog.event_data.Source\ ID
-    Source Name: winlog.event_data.Source\ Name
-    Status Code: winlog.event_data.Status\ Code
-    Status Description: winlog.event_data.Status\ Description
-    Threat ID: winlog.event_data.Threat\ ID
-    Threat Name: winlog.event_data.Threat\ Name
-    Type ID: winlog.event_data.Type\ ID
-    Type Name: winlog.event_data.Type\ Name
+    Post_Clean_Status: winlog.event_data.Post\ Clean\ Status
+    Pre_Execution_Status: winlog.event_data.Pre\ Execution\ Status
+    Process_Name: winlog.event_data.Process\ Name
+    Product_Name: winlog.event_data.Product\ Name
+    Product_Version: winlog.event_data.Product\ Version
+    Remediation_User: winlog.event_data.Remediation\ User
+    Security_intelligence_Version: winlog.event_data.Security\ intelligence\ Version
+    Severity_ID: winlog.event_data.Severity\ ID
+    Severity_Name: winlog.event_data.Severity\ Name
+    Source_ID: winlog.event_data.Source\ ID
+    Source_Name: winlog.event_data.Source\ Name
+    Status_Code: winlog.event_data.Status\ Code
+    Status_Description: winlog.event_data.Status\ Description
+    Threat_ID: winlog.event_data.Threat\ ID
+    Threat_Name: winlog.event_data.Threat\ Name
+    Type_ID: winlog.event_data.Type\ ID
+    Type_Name: winlog.event_data.Type\ Name

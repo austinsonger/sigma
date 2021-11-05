@@ -1,5 +1,8 @@
 title: Suspicious PowerShell Invocations - Generic
-id: 3d304fda-78aa-43ed-975c-d740798a49c1
+id: bbb80e91-5746-4fbe-8898-122e2cafdbf4
+related:
+    - id: 3d304fda-78aa-43ed-975c-d740798a49c1
+      type: derived
 status: experimental
 description: Detects suspicious PowerShell invocation command parameters
 tags:
@@ -8,20 +11,24 @@ tags:
     - attack.t1086  #an old one
 author: Florian Roth (rule)
 date: 2017/03/12
+modified: 2021/10/18
 logsource:
     product: windows
-    service: powershell
+    category: ps_module
 detection:
     encoded:
-        - ' -enc '
-        - ' -EncodedCommand '
+        ContextInfo|contains:
+            - ' -enc '
+            - ' -EncodedCommand '
     hidden:
-        - ' -w hidden '
-        - ' -window hidden '
-        - ' -windowstyle hidden '
+        ContextInfo|contains:
+            - ' -w hidden '
+            - ' -window hidden '
+            - ' -windowstyle hidden '
     noninteractive:
-        - ' -noni '
-        - ' -noninteractive '
+        ContextInfo|contains:
+            - ' -noni '
+            - ' -noninteractive '
     condition: all of them
 falsepositives:
     - Penetration tests
