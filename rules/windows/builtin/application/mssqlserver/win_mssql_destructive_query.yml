@@ -1,6 +1,6 @@
 title: MSSQL Destructive Query
 id: 00321fee-ca72-4cce-b011-5415af3b9960
-status: experimental
+status: test
 description: |
     Detects the invocation of MS SQL transactions that are destructive towards table or database data, such as "DROP TABLE" or "DROP DATABASE".
 references:

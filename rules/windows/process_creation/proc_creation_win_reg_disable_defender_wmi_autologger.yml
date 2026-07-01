@@ -3,7 +3,7 @@ id: a1b2c3d4-e5f6-a7b8-c9d0-e1f2a3b4c5d6
 related:
     - id: f37b4bce-49d0-4087-9f5b-58bffda77316
       type: similar
-status: experimental
+status: test
 description: |
     Detects the use of reg.exe to disable the Event Tracing for Windows (ETW) Autologger session for Windows Defender API and Audit events.
     By setting the 'Start' value to '0' for the 'DefenderApiLogger' or 'DefenderAuditLogger' session, an attacker can prevent these critical security events

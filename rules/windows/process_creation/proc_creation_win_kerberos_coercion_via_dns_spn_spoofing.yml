@@ -3,7 +3,7 @@ id: 0ed99dda-6a35-11ef-8c99-0242ac120002
 related:
     - id: b07e58cf-cacc-4135-8473-ccb2eba63dd2
       type: similar
-status: experimental
+status: test
 description: |
     Detects the presence of "UWhRC....AAYBAAAA" pattern in command line.
     The pattern "1UWhRCAAAAA..BAAAA" is a base64-encoded signature that corresponds to a marshaled CREDENTIAL_TARGET_INFORMATION structure.

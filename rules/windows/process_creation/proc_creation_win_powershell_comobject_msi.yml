@@ -1,6 +1,6 @@
 title: Obfuscated PowerShell MSI Install via WindowsInstaller COM
 id: 7b6a7418-3afc-11f0-aff4-000d3abf478c
-status: experimental
+status: test
 description: |
     Detects the execution of obfuscated PowerShell commands that attempt to install MSI packages via the Windows Installer COM object (`WindowsInstaller.Installer`).
     The technique involves manipulating strings to hide functionality, such as constructing class names using string insertion (e.g., 'indowsInstaller.Installer'.Insert(0,'W')) and correcting

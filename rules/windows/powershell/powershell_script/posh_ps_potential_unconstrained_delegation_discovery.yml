@@ -1,6 +1,6 @@
 title: Potential Unconstrained Delegation Discovery Via Get-ADComputer - ScriptBlock
 id: cdfa73b6-3c9d-4bb8-97f8-ddbd8921f5c5
-status: experimental
+status: test
 description: Detects the use of the "Get-ADComputer" cmdlet in order to identify systems which are configured for unconstrained delegation.
 references:
     - https://pentestlab.blog/2022/03/21/unconstrained-delegation/

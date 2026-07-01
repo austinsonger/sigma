@@ -1,6 +1,6 @@
 title: Windows Recovery Environment Disabled Via Reagentc
 id: db1c21e4-cd66-4b4e-85ca-590f0780529c
-status: experimental
+status: test
 description: |
     Detects attempts to disable windows recovery environment using Reagentc.
     ReAgentc.exe is a command-line tool in Windows used to manage the Windows Recovery Environment (WinRE).

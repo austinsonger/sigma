@@ -1,6 +1,6 @@
 title: Special File Creation via Mknod Syscall
 id: 710bdbce-495d-491d-9a8f-7d0d88d2b41e
-status: experimental
+status: test
 description: |
     Detects usage of the `mknod` syscall to create special files (e.g., character or block devices).
     Attackers or malware might use `mknod` to create fake devices, interact with kernel interfaces,

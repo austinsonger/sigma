@@ -1,6 +1,6 @@
 title: Process Execution From WebDAV Share
 id: f8de9dd5-7a63-4cfd-9d0c-ae124878b5a9
-status: experimental
+status: test
 description: |
     Detects execution of processes with image paths starting with WebDAV shares (\\), which might indicate malicious file execution from remote web shares.
     Execution of processes from WebDAV shares can be a sign of lateral movement or exploitation attempts, especially if the process is not a known legitimate application.
