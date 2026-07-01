@@ -1,6 +1,6 @@
 title: Suspicious File Access to Browser Credential Storage
 id: a1dfd976-4852-41d4-9507-dc6590a3ccd0
-status: experimental
+status: test
 description: |
     Detects file access to browser credential storage paths by non-browser processes, which may indicate credential access attempts.
     Adversaries may attempt to access browser credential storage to extract sensitive information such as usernames and passwords or cookies.

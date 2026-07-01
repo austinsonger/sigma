@@ -7,7 +7,7 @@ related:
       type: similar
     - id: 0ed99dda-6a35-11ef-8c99-0242ac120002 # Kerberos Coercion Via DNS SPN Spoofing Attempt
       type: similar
-status: experimental
+status: test
 description: |
     Detects modifications to DNS records in Active Directory where the Distinguished Name (DN) contains a base64-encoded blob
     matching the pattern "1UWhRCAAAAA...BAAAA". This pattern corresponds to a marshaled CREDENTIAL_TARGET_INFORMATION structure,

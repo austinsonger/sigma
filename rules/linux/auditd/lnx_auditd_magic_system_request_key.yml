@@ -1,6 +1,6 @@
 title: Potential Abuse of Linux Magic System Request Key
 id: ea61bb82-a5e0-42e6-8537-91d29500f1b9
-status: experimental
+status: test
 description: |
     Detects the potential abuse of the Linux Magic SysRq (System Request) key by adversaries with root or sufficient privileges
     to silently manipulate or destabilize a system. By writing to /proc/sysrq-trigger, they can crash the system, kill processes,

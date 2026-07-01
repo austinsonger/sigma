@@ -1,6 +1,6 @@
 title: System Information Discovery via Registry Queries
 id: 0022869c-49f7-4ff2-ba03-85ac42ddac58
-status: experimental
+status: test
 description: Detects attempts to query system information directly from the Windows Registry.
 references:
     - https://cert.gov.ua/article/6277849

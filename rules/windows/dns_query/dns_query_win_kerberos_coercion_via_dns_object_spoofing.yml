@@ -5,7 +5,7 @@ related:
       type: similar
     - id: 5588576c-5898-4fac-bcdd-7475a60e8f43 # Suspicious DNS Query Indicating Kerberos Coercion via DNS Object Spoofing - Network
       type: similar
-status: experimental
+status: test
 description: |
     Detects DNS queries containing patterns associated with Kerberos coercion attacks via DNS object spoofing.
     The pattern "1UWhRCAAAAA..BAAAA" is a base64-encoded signature that corresponds to a marshaled CREDENTIAL_TARGET_INFORMATION structure.

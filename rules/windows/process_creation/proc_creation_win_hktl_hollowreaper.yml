@@ -1,6 +1,6 @@
 title: HackTool - HollowReaper Execution
 id: 85d23b42-9a9d-4f8f-b3d7-d2733c1d58f5
-status: experimental
+status: test
 description: |
     Detects usage of HollowReaper, a process hollowing shellcode launcher used for stealth payload execution through process hollowing.
     It replaces the memory of a legitimate process with custom shellcode, allowing the attacker to execute payloads under the guise of trusted binaries.

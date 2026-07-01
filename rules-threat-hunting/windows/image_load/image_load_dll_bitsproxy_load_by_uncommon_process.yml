@@ -1,6 +1,6 @@
 title: BITS Client BitsProxy DLL Loaded By Uncommon Process
 id: e700ff14-1bff-4d1d-9438-738dff5f0466
-status: experimental
+status: test
 description: |
     Detects an uncommon process loading the "BitsProxy.dll". This DLL is used when the BITS COM instance or API is used.
     This detection can be used to hunt for uncommon processes loading this DLL in your environment. Which may indicate potential suspicious activity occurring.

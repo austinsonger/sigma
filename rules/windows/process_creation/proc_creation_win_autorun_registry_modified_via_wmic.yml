@@ -1,6 +1,6 @@
 title: Suspicious Autorun Registry Modified via WMI
 id: c80e66d8-1780-48a9-b412-46663fd21ac0
-status: experimental
+status: test
 description: |
     Detects suspicious activity where the WMIC process is used to create an autorun registry entry via reg.exe, which is often indicative of persistence mechanisms employed by malware.
 references:

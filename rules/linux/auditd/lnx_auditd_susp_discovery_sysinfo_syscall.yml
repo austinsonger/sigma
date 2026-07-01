@@ -1,6 +1,6 @@
 title: System Info Discovery via Sysinfo Syscall
 id: b207d563-a1d9-4275-b349-77d1eb55aa6d
-status: experimental
+status: test
 description: |
     Detects use of the sysinfo system call in Linux, which provides a snapshot of key system statistics such as uptime, load averages, memory usage, and the number of running processes.
     Malware or reconnaissance tools might leverage sysinfo to fingerprint the system - gathering data to determine if it's a viable target.

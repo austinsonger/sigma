@@ -5,7 +5,7 @@ related:
       type: similar
     - id: 2fbbe9ff-0afc-470b-bdc0-592198339968
       type: derived
-status: experimental
+status: test
 description: |
     Detects the execution of a renamed instance of the Remote Monitoring and Management (RMM) tool, MeshAgent.
     RMM tools such as MeshAgent are commonly utilized by IT administrators for legitimate remote support and system management.
