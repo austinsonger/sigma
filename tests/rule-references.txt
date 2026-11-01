@@ -4149,3 +4149,13 @@ https://cloud.google.com/access-context-manager/docs/audit-logging
 https://github.com/vari-sh/RedTeamGrimoire/tree/668e0357072546065729ad623f8c02f7be21bb08/Doppelganger
 https://learn.microsoft.com/en-us/entra/id-protection/concept-identity-protection-risks#impossible-travel
 https://www.elastic.co/guide/en/security/current/linux-restricted-shell-breakout-via-linux-binary-s.html
+https://learn.microsoft.com/en-us/iis/manage/provisioning-and-managing-iis/configure-logging-in-iis
+https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-rprn/4464eaf0-f34f-40d5-b970-736437a21913
+https://learn.microsoft.com/en-us/entra/architecture/security-operations-applications#service-principal-assigned-to-a-role
+https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns
+https://www.hexacorn.com/blog/2013/01/19/beyond-good-ol-run-key-part-3/
+https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4776
+https://github.com/The-Viper-One/Invoke-PowerDPAPI/
+https://learn.microsoft.com/en-us/dotnet/framework/tools/regasm-exe-assembly-registration-tool
+https://any.run/report/6eea2773c1b4b5c6fb7c142933e220c96f9a4ec89055bf0cf54accdcde7df535/a407f006-ee45-420d-b576-f259094df091
+https://twitter.com/standa_t/status/1808868985678803222
